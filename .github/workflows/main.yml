@@ -6,7 +6,7 @@ on:
       - main
   schedule: # 취소표 알림을 위해 주기적인 실행 설정 (예: 5분마다)
     - cron: '*/5 * * * *'
-  # workflow_dispatch: {}
+  workflow_dispatch: {}
 
 jobs:
   build_and_publish: # 기존 CI/CD 작업을 위한 Job
