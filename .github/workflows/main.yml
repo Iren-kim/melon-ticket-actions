@@ -17,7 +17,7 @@ jobs:
       - name: Prepare
         run: npm ci
       - name: Lint
-        uses: mooyoul/tslint-actions@master
+        uses: mooyoul/tslint-actions@v1.1.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           pattern: '*.ts'
@@ -34,7 +34,7 @@ jobs:
     timeout-minutes: 5
     steps:
       - name: Check Melon Tickets
-        uses: mooyoul/melon-ticket-actions@master # 액션의 최신 버전을 확인하여 사용하세요 (예: @v1.1.0)
+        uses: mooyoul/melon-ticket-actions@v1.1.0 # 액션의 최신 버전을 확인하여 사용하세요 (예: @v1.1.0)
         with:
           product-id: '211309' # 상품 ID (문자열 또는 숫자)
           schedule-id: '100002' # 스케줄 ID (문자열 또는 숫자)
