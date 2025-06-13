@@ -38,7 +38,7 @@ jobs:
         with:
           product-id: '211309' # 상품 ID (문자열 또는 숫자)
           schedule-id: '100002' # 스케줄 ID (문자열 또는 숫자)
-          # seat-id: '1_0' # 특정 좌석을 지정하고 싶다면 여기에 추가 (필수 아님)
+          seat-id: '1_0' # 특정 좌석을 지정하고 싶다면 여기에 추가 (필수 아님)
           slack-incoming-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }} # Slack 웹훅 URL (Secrets에 저장 권장)
           message: "취소표 알림! 원하는 좌석이 나왔는지 확인하세요!" # 알림 메시지
 
