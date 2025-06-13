@@ -1,7 +1,14 @@
-name: workflow
-on: push
+name: CI/CD and Melon Ticket Notifier # 워크플로우 이름을 좀 더 명확하게 변경
+on:
+  push:
+    branches: # push 이벤트 트리거를 특정 브랜치로 제한하는 것이 좋습니다.
+      - master
+      - main
+  schedule: # 취소표 알림을 위해 주기적인 실행 설정 (예: 5분마다)
+    - cron: '*/5 * * * *'
+
 jobs:
-  job:
+  build_and_publish: # 기존 CI/CD 작업을 위한 Job
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -19,10 +26,21 @@ jobs:
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         run: npx semantic-release
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          PRODUCT_ID: '211309'
-          SCHEDULE_NO: '100002'
-          SLACK-INCOMING-WEBHOOK-URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }} # 이 환경 변수는 semantic-release에 필요합니다.
+
+  check_melon_tickets: # 멜론 티켓 알림을 위한 새로운 Job
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check Melon Tickets
+        uses: mooyoul/melon-ticket-actions@v1.1.0 # 액션의 최신 버전을 확인하여 사용하세요 (예: @v1.1.0)
+        with:
+          product-id: '211309' # 상품 ID (문자열 또는 숫자)
+          schedule-id: '100002' # 스케줄 ID (문자열 또는 숫자)
+          # seat-id: '1_0' # 특정 좌석을 지정하고 싶다면 여기에 추가 (필수 아님)
+          slack-incoming-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }} # Slack 웹훅 URL (Secrets에 저장 권장)
+          message: "취소표 알림! 원하는 좌석이 나왔는지 확인하세요!" # 알림 메시지
+
           
           
           
