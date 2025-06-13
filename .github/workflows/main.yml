@@ -22,6 +22,8 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           PRODUCT_ID: '211309'
           SCHEDULE_NO: '100002'
+          SLACK-INCOMING-WEBHOOK-URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          
           
           
           
