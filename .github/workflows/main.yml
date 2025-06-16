@@ -4,8 +4,8 @@ on:
     branches: # push 이벤트 트리거를 특정 브랜치로 제한
       - master
       - main
-  schedule: # 취소표 알림을 위해 주기적인 실행 설정 (예: 5분마다)
-    - cron: '*/5 * * * *'
+  # schedule: # 취소표 알림을 위해 주기적인 실행 설정 (예: 5분마다)
+    # - cron: '*/5 * * * *'
   workflow_dispatch: {}
 
 jobs:
